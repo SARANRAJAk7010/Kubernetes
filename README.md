@@ -1,7 +1,7 @@
 # Kubernetes
 
 1. Launch a Kubernetes Cluster
-Launch EC2 instances and connenct to instances via EC2 instance cconnect
+Launch EC2 instances and connenct to instances via EC2 instance connect
 
 --- Launch an EKS Cluster
 eksctl create cluster \
@@ -31,7 +31,7 @@ EC2 -> Actions dropdown -> Security, Modify IAM role.
 
 AWS -> eksctl -> CloudFormation will create required resources
 
--> Cant able to access Kubernetes cluster even after allowing AdministratorAccess, Need to have Allow Access
+-> Cant able to access Kubernetes cluster even after allowing AdministratorAccess, Need to have Allow Access. Coz k8s follow RBAC  
 
 Create access entry -> Under IAM Principal, select yours -> Under Policy name, select "AmazonEKSClusterAdminPolicy" -> select Add Policy 
 
@@ -65,3 +65,19 @@ $ aws ecr create-repository \
 5. Push your container image to ECR
 ECR console -> created new repo -> Select, "view push commands"
 RUn the 4 commands in your EC2 instance connect
+
+- write deployment.yaml
+- write service.yaml
+
+-> Install Kubectl 
+$ sudo curl -o /usr/local/bin/kubectl \
+https://s3.us-west-2.amazonaws.com/amazon-eks/1.31.0/2024-09-12/bin/linux/amd64/kubectl
+
+
+$ kubectl apply -f flask-deployment.yaml
+$ kubectl apply -f flask-service.yaml
+
+$ sudo chmod +x /usr/local/bin/kubectl
+
+If find an error :
+$ aws eks update-kubeconfig --name cluster-name --region your-region-code
