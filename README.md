@@ -48,7 +48,7 @@ $ docker build -t nextwork-flask-backend .
 -> Install docker
 $ sudo yum install -y docker
 
-# error, Docker needs root level user to build docker.
+#error, Docker needs root level user to build docker.
 $ whoami
 op : ec2user
 
