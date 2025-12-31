@@ -1,0 +1,23 @@
+cat << EOF > flask-deployment.yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextwork-flask-backend
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nextwork-flask-backend
+  template:
+    metadata:
+      labels:
+        app: nextwork-flask-backend
+    spec:
+      containers:
+        - name: nextwork-flask-backend
+          image: <your-ecr-image-url>
+          ports:
+            - containerPort: 8080
+EOF
