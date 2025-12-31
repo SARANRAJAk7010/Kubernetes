@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: nextwork-flask-backend
-          image: <your-ecr-image-url>
+          image: <your-ecr-image-url>  // ECR console -> Get URL
           ports:
             - containerPort: 8080
 EOF
