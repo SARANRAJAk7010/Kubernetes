@@ -34,3 +34,34 @@ AWS -> eksctl -> CloudFormation will create required resources
 -> Cant able to access Kubernetes cluster even after allowing AdministratorAccess, Need to have Allow Access
 
 Create access entry -> Under IAM Principal, select yours -> Under Policy name, select "AmazonEKSClusterAdminPolicy" -> select Add Policy 
+
+2. Pull the code for your Backend
+$git clone <github URL>
+
+-> Install git
+$ sudo dnf update
+$ sudo dnf install git -y
+
+3. Build a container Image for your Backend
+$ docker build -t nextwork-flask-backend .
+
+-> Install docker
+$ sudo yum install -y docker
+
+# error, Docker needs root level user to build docker.
+$ whoami
+op : ec2user
+
+-->Add ec2-user to the Docker group:
+$ sudo usermod -a -G docker ec2-user
+
+$ docker build -t nextwork-flask-backend .
+
+4. Push Your Container Image to Amazon ECR
+$ aws ecr create-repository \
+  --repository-name nextwork-flask-backend \
+  --image-scanning-configuration scanOnPush=true \
+
+5. Push your container image to ECR
+ECR console -> created new repo -> Select, "view push commands"
+RUn the 4 commands in your EC2 instance connect
